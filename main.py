@@ -43,14 +43,27 @@ class Guesser(Agent):
         super().__init__("guesser")
         self.context.append({"role": "system", "content": "You are the guesser in a game of 20 Questions. Your goal is to guess the topic by asking yes/no questions. Be strategic in your questioning."})
 
-    def ask_question(self) -> str:
-        prompt = "Based on the previous questions and answers, what yes/no question would you like to ask next? Respond with just the question."
-        return self.generate_response(prompt)
-
-    def make_guess(self) -> str:
-        prompt = "Based on the information you've gathered, what do you think the topic is? Make your best guess. Respond with just the guess."
-        return self.generate_response(prompt)
-
+    def take_turn(self):
+        prompt = """
+        Based on the information you have, decide whether to ask a question or make a guess.
+        If you're not confident enough to guess, ask a yes/no question that explores a different aspect of the topic.
+        If you think you know the answer, make a guess.
+        
+        Respond in the following format:
+        Action: [QUESTION or GUESS]
+        Content: [Your question or guess here]
+        
+        Remember, questions should be yes/no questions. Guesses should be specific.
+        """
+        response = self.generate_response(prompt)
+        action, content = self.parse_response(response)
+        return action.lower(), content
+    
+    def parse_response(self, response: str) -> Tuple[str, str]:
+        lines = response.strip().split("\n")
+        action = lines[0].split(":")[1].strip().lower()
+        content = lines[1].split(":")[1].strip()
+        return action, content
 class Game:
     def __init__(self, host: Host, guesser: Guesser, max_turns: int = 20):
         self.host = host
@@ -96,18 +109,17 @@ class Game:
         while not self.game_over and self.current_turn < self.max_turns:
             self.current_turn += 1
             
-            # Guesser's turn
-            if self.current_turn % 2 == 1:
-                action = self.guesser.ask_question()
-                print(f"Turn {self.current_turn}: Guesser asks: {action}")
-                answer = self.host.answer_question(action)
+            action_type, action_content = self.guesser.take_turn()
+            
+            if action_type == "question":
+                print(f"Turn {self.current_turn}: Guesser asks: {action_content}")
+                answer = self.host.answer_question(action_content)
                 print(f"Host answers: {answer}")
-                self.guesser.context.append({"role": "user", "content": f"Question: {action}\nAnswer: {answer}"})
-            else:
-                action = self.guesser.make_guess()
-                print(f"Turn {self.current_turn}: Guesser guesses: {action}")
+                self.guesser.context.append({"role": "user", "content": f"Question: {action_content}\nAnswer: {answer}"})
+            elif action_type == "guess":
+                print(f"Turn {self.current_turn}: Guesser guesses: {action_content}")
                 
-                if self.is_correct_guess(action, self.host.chosen_topic):
+                if self.is_correct_guess(action_content, self.host.chosen_topic):
                     self.game_over = True
                     self.winner = "guesser"
                     print(f"Correct! The guesser wins in {self.current_turn} turns.")

@@ -25,6 +25,14 @@ Game over! The host wins. The topic was: basketball
 - LLM's question generator is too influenced by previous contexts (tokens) - need a question generator to balance exploration and exploitation- but this trends it toward exploitation. Also asks too narrow questions e.g. 'is it a cactus' vs 'does it produce food'
 - LLM's ques
 
+How to deal with ambiguit e.g. answer here is airplane:
+
+Turn 9: Guesser asks: Is it a commercial airplane?
+Host answers: Yes.
+Turn 10: Guesser guesses: Is it a passenger jet?
+LLM Judgment: incorrect. a "passenger jet" is a type of airplane, but it is not specifically the answer "airplane" itself, which includes all kinds of airplanes beyond just passenger jets.
+Incorrect guess. The game continues.
+
 Thoughts:
 
 - exploration vs exploitation
