@@ -15,7 +15,7 @@ class Agent:
         self.context.append({"role": "user", "content": prompt})
         
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=self.context
         )
         
@@ -60,6 +60,35 @@ class Game:
         self.game_over = False
         self.winner = None
 
+    def is_correct_guess(self, guess: str, topic: str) -> bool:
+        prompt = f"""
+        Your job is to determine whether the guesser has correctly won a game of 20 questions.
+        20 Questions is a guessing game where one player thinks of an object, person, or concept, 
+        and the other player(s) try to identify it by asking up to 20 yes-or-no questions. The game
+        ends when either the subject is correctly guessed or 20 questions have been asked without a
+        correct guess, making it a test of deductive reasoning and strategic questioning.
+        
+        Respond with either 'Correct' or 'Incorrect' if the guess accurately matches the topic, followed by a brief explanation.
+        The correct answer is "{topic}".
+        The guesser has guessed "{guess}".
+        
+        The guesser should have nailed down the answer e.g. if the answer is 
+        "cactus" you shouldn't accept the guess "plant", but do accept "a catcus".
+        """
+
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": "You are an impartial judge in a game of 20 Questions."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=100
+        )
+
+        result = response.choices[0].message.content.strip().lower()
+        print(f"LLM Judgment: {result}")
+        return result.startswith("correct")
+
     def play(self) -> Tuple[bool, int]:
         self.host.choose_topic()
         print(f"Host has chosen the topic: {self.host.chosen_topic}")
@@ -78,10 +107,11 @@ class Game:
                 action = self.guesser.make_guess()
                 print(f"Turn {self.current_turn}: Guesser guesses: {action}")
                 
-                if action.lower() == self.host.chosen_topic.lower():
+                if self.is_correct_guess(action, self.host.chosen_topic):
                     self.game_over = True
                     self.winner = "guesser"
                     print(f"Correct! The guesser wins in {self.current_turn} turns.")
+                    print(f"The actual topic was: {self.host.chosen_topic}")
                 else:
                     print("Incorrect guess. The game continues.")
             
@@ -120,6 +150,7 @@ class GameRunner:
 
 # Run the game
 topics = ["cat", "airplane", "basketball", "computer", "pizza", "elephant", "guitar", "sunflower", "smartphone", "ocean"]
-runner = GameRunner(3, topics)
+# topics = ["cat"]
+runner = GameRunner(10, topics)
 runner.run()
 runner.analyze_results()
