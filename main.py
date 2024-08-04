@@ -5,7 +5,6 @@ import os
 import argparse
 
 
-# Set up OpenAI client
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 class Agent:
