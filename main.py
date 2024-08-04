@@ -42,13 +42,14 @@ class Guesser(Agent):
     def __init__(self):
         super().__init__("guesser")
         self.context.append({"role": "system", "content": "You are the guesser in a game of 20 Questions. Your goal is to guess the topic by asking yes/no questions. Be strategic in your questioning."})
-
+        self.qa_history = []
+        
     def take_turn(self):
         prompt = """
         Based on the information you have, decide whether to ask a question or make a guess.
         If you're not confident enough to guess, ask a yes/no question that explores a different aspect of the topic.
         If you think you know the answer, make a guess.
-        
+                
         Respond in the following format:
         Action: [QUESTION or GUESS]
         Content: [Your question or guess here]
@@ -64,6 +65,31 @@ class Guesser(Agent):
         action = lines[0].split(":")[1].strip().lower()
         content = lines[1].split(":")[1].strip()
         return action, content
+    
+    def add_qa_to_history(self, question: str, answer: str):
+        self.qa_history.append((question, answer))
+    
+    def summarize_attributes(self) -> str:
+        prompt = """
+        Based on the following questions and answers from a game of 20 Questions,
+        summarize the known attributes of the object. Present the information
+        in two sections:
+        1. What we know the object IS or HAS
+        2. What we know the object IS NOT or DOES NOT HAVE
+        
+        Present each section in a concise, bullet-point format. If there are any
+        contradictions or uncertainties, mention them.
+
+        Q&A History:
+        """
+        for q, a in self.qa_history:
+            prompt += f"\nQ: {q}\nA: {a}"
+
+        prompt += "\n\nSummary of attributes:"
+
+        response = self.generate_response(prompt)
+        return response
+    
 class Game:
     def __init__(self, host: Host, guesser: Guesser, max_turns: int = 20):
         self.host = host
@@ -115,6 +141,7 @@ class Game:
                 print(f"Turn {self.current_turn}: Guesser asks: {action_content}")
                 answer = self.host.answer_question(action_content)
                 print(f"Host answers: {answer}")
+                self.guesser.add_qa_to_history(action_content, answer)
                 self.guesser.context.append({"role": "user", "content": f"Question: {action_content}\nAnswer: {answer}"})
             elif action_type == "guess":
                 print(f"Turn {self.current_turn}: Guesser guesses: {action_content}")
@@ -126,6 +153,12 @@ class Game:
                     print(f"The actual topic was: {self.host.chosen_topic}")
                 else:
                     print("Incorrect guess. The game continues.")
+            
+            # After each turn, summarize the attributes
+            if not self.game_over:
+                print("\nCurrent summary of attributes:")
+                print(self.guesser.summarize_attributes())
+                print()  # Add a blank line for readability
             
         if not self.game_over:
             self.winner = "host"

@@ -39,4 +39,38 @@ Thoughts:
 - until we have A yes the agent should explore the space 100% of the time
 - the more yes'es we have the more we should favour exploitation
 
--
+Observation - some games go by with all questions and not a single guess! make guesses more likely later in the game.
+
+Observation- some times the question misleads as it becomes too specific e.g.
+
+Turn 19: Guesser guesses: Is it an e-reader?
+LLM Judgment: incorrect. an e-reader is a specific type of device for reading digital books, while a computer is a more general device capable of performing a wide variety of tasks beyond just reading.
+Incorrect guess. The game continues.
+Turn 20: Guesser guesses: Is it a tablet?
+LLM Judgment: incorrect. a "tablet" is a specific type of device and not accurately synonymous with a "computer". although related, they are distinct categories of technology. the correct answer is "computer".
+Incorrect guess. The game continues.
+Game over! The host wins. The topic was: computer
+
+Issue: After writing the summarising attributes prompt we get a shortened list of attributes e.g. for a smartphone we got:
+
+- It is not a living thing.
+- It is man-made.
+- It is used for entertainment.
+- It can be found indoors.
+- It requires electricity to function.
+- It is related to visual entertainment, like watching movies or TV.
+- It is not primarily used to play video games.
+- It is used to listen to music or audio.
+- It is commonly found in a living room.
+
+But prompting an LLM with this leads to outputs like smartphone.
+We should also tell it what it is not.
+
+e.g. Some attributesa are intentionally misleading e.g. 'commonly found in a living room' leads to answers like 'TV'. maybe some kind of bagging (e.g. like a decision tree)
+
+winning condition does not always work e.g.:
+Turn 16: Guesser guesses: Is it a personal computer (PC)?
+LLM Judgment: incorrect.
+
+the correct answer is "computer," whereas the guess "a personal computer (pc)" is more specific and refers to a particular type of computer. the guess should match the given answer exactly.
+Incorrect guess. The game continues.
