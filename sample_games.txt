@@ -200,3 +200,163 @@ Turn 1: Guesser asks: Is it a living thing?
 Host answers: No.
 Turn 2: Guesser asks: Is it a man-made object?
 Host answers: Yes.
+Turn 3: Guesser asks: Is it commonly found indoors?
+Host answers: Yes.
+Turn 4: Guesser asks: Is it an electronic device?
+Host answers: No.
+Turn 5: Guesser asks: Is it furniture?
+Host answers: No.
+Turn 6: Guesser asks: Is it used for food or drink preparation?
+Host answers: No.
+Turn 7: Guesser asks: Is it used for cleaning?
+Host answers: No.
+Turn 8: Guesser asks: Is it used for entertainment?
+Host answers: Yes.
+Turn 9: Guesser asks: Is it a board game?
+Host answers: No.
+Turn 10: Guesser asks: Is it something you can watch?
+Host answers: Yes.
+Turn 11: Guesser asks: Is it a type of screen or display?
+Host answers: No.
+Turn 12: Guesser asks: Is it a physical object?
+Host answers: Yes.
+Turn 13: Guesser asks: Is it something you play with?
+Host answers: Yes.
+Turn 14: Guesser guesses: Is it a toy?
+LLM Judgment: incorrect. 
+the guess "is it a toy?" is an attempt to clarify the nature of the object rather than an actual guess of the final answer. the correct format for the final guess should explicitly identify the object, person, or concept, in this case, "basketball."
+Incorrect guess. The game continues.
+Turn 15: Guesser asks: Does it involve sports?
+Host answers: Yes.
+Turn 16: Guesser asks: Is it commonly used outdoors?
+Host answers: Yes.
+Turn 17: Guesser asks: Is it related to a ball sport?
+Host answers: Yes.
+Turn 18: Guesser asks: Is it used in soccer (football)?
+Host answers: No.
+Turn 19: Guesser asks: Is it used in basketball?
+Host answers: Yes.
+Turn 20: Guesser guesses: Is it a basketball?
+LLM Judgment: correct. the guesser asked, "is it a basketball?" which precisely matches the correct answer "basketball".
+Correct! The guesser wins in 20 turns.
+The actual topic was: basketball
+
+Game 8:
+Host has chosen the topic: guitar
+Turn 1: Guesser asks: Is the topic a living thing?
+Host answers: No.
+Turn 2: Guesser asks: Is the topic man-made?
+Host answers: Yes.
+Turn 3: Guesser asks: Is the topic a technological device?
+Host answers: No.
+Turn 4: Guesser asks: Is the topic an everyday household item?
+Host answers: No.
+Turn 5: Guesser asks: Is the topic something primarily used outdoors?
+Host answers: No.
+Turn 6: Guesser asks: Is the topic an artistic or decorative item?
+Host answers: Yes.
+Turn 7: Guesser asks: Is the topic primarily made of fabric or textile materials?
+Host answers: No.
+Turn 8: Guesser asks: Is the topic primarily made of metal or stone?
+Host answers: No.
+Turn 9: Guesser asks: Is the topic made primarily of paper or wood?
+Host answers: Yes.
+Turn 10: Guesser asks: Is the topic used to store something?
+Host answers: No.
+Turn 11: Guesser asks: Is the topic a form of visual art, like a painting or sculpture?
+Host answers: No.
+Turn 12: Guesser asks: Is the topic a piece of furniture?
+Host answers: No.
+Turn 13: Guesser asks: Is the topic a form of written work, like a book or letter?
+Host answers: No.
+Turn 14: Guesser asks: Is the topic used during celebrations or holidays?
+Host answers: No.
+Turn 15: Guesser asks: Is the topic related to an activity or hobby?
+Host answers: Yes.
+Turn 16: Guesser asks: Is the topic used for a craft or art hobby, such as painting or drawing?
+Host answers: No.
+Turn 17: Guesser asks: Is the topic related to a sport or physical activity?
+Host answers: No.
+Turn 18: Guesser asks: Is the topic related to playing music?
+Host answers: Yes.
+Turn 19: Guesser guesses: Is the topic a musical instrument?
+LLM Judgment: incorrect. the guess "is the topic a musical instrument?" is not specific enough. the correct answer is "guitar".
+Incorrect guess. The game continues.
+Turn 20: Guesser asks: Is the topic primarily composed of wood?
+Host answers: Yes.
+Game over! The host wins. The topic was: guitar
+
+Game 9:
+Host has chosen the topic: airplane
+Turn 1: Guesser asks: Is it a living thing?
+Host answers: No.
+Turn 2: Guesser asks: Is it a man-made object?
+Host answers: Yes.
+Turn 3: Guesser asks: Is it an electronic device?
+Host answers: No.
+Turn 4: Guesser asks: Is it commonly found indoors?
+Host answers: No.
+Turn 5: Guesser asks: Is it a form of transportation?
+Host answers: Yes.
+Turn 6: Guesser asks: Does it travel on roads?
+Host answers: No.
+Turn 7: Guesser asks: Does it travel on water?
+Host answers: No.
+Turn 8: Guesser asks: Does it travel through the air?
+Host answers: Yes.
+Turn 9: Guesser guesses: Is it an airplane?
+LLM Judgment: correct. the guess "is it an airplane?" accurately matches the specified answer "airplane".
+Correct! The guesser wins in 9 turns.
+The actual topic was: airplane
+
+Game 10:
+Host has chosen the topic: pizza
+Turn 1: Guesser asks: Is it a living thing?
+Host answers: No.
+Turn 2: Guesser asks: Is it a man-made object?
+Host answers: Yes.
+Turn 3: Guesser asks: Is it something commonly found in a household?
+Host answers: Yes.
+Turn 4: Guesser asks: Is it an electronic device?
+Host answers: No.
+Turn 5: Guesser asks: Is it something used for cooking or food preparation?
+Host answers: No.
+Turn 6: Guesser asks: Is it something typically found in a living room?
+Host answers: No.
+Turn 7: Guesser asks: Is it commonly found in a bathroom?
+Host answers: No.
+Turn 8: Guesser asks: Is it typically found in a bedroom?
+Host answers: No.
+Turn 9: Guesser asks: Is it used for cleaning?
+Host answers: No.
+Turn 10: Guesser asks: Is it something typically found in a garage or workshop?
+Host answers: No.
+Turn 11: Guesser asks: Is it commonly found in an office or study?
+Host answers: No.
+Turn 12: Guesser asks: Is it typically found in a kitchen?
+Host answers: Yes.
+Turn 13: Guesser asks: Is it a piece of furniture?
+Host answers: No.
+Turn 14: Guesser asks: Is it typically used for storing food or ingredients?
+Host answers: No.
+Turn 15: Guesser asks: Is it a utensil?
+Host answers: No.
+Turn 16: Guesser asks: Is it used for serving food or drinks?
+Host answers: No.
+Turn 17: Guesser asks: Is it an appliance?
+Host answers: No.
+Turn 18: Guesser asks: Is it used for eating?
+Host answers: Yes.
+Turn 19: Guesser guesses: Is it a plate?
+LLM Judgment: incorrect. your guess "is it a plate?" does not correctly identify the correct answer, which is "pizza".
+Incorrect guess. The game continues.
+Turn 20: Guesser asks: Is it used to hold food?
+Host answers: No.
+Game over! The host wins. The topic was: pizza
+
+Game Analysis:
+Total games: 10
+Guesser wins: 7
+Host wins: 3
+Guesser win rate: 70.00%
+Average turns per game: 15.00
