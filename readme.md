@@ -20,6 +20,7 @@ Average turns per game: 15.50
 ```
 
 The game topic is chosen randomly for each game from the [topics.txt](topics.txt) file.
+
 You can see example of of an experiment that's previously ran [here](sample_games.txt).
 
 ### Evaluation
