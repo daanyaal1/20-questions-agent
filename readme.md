@@ -8,6 +8,29 @@ export OPENAI_API_KEY=<YOUR-API-KEY>  # set your API key as an environment varia
 python main.py --num_games 10
 ```
 
+During the experiment a summary of what's happening in each game will be output in the terminal e.g.:
+
+```
+Game 3:
+Host has chosen the topic: smartphone
+Turn 1: Guesser asks: Is it a living thing?
+Host answers: No.
+Turn 2: Guesser asks: Is it something that is used in everyday life?
+Host answers: Yes.
+Turn 3: Guesser asks: Is it electronic?
+Host answers: Yes.
+Turn 4: Guesser asks: Is it a device primarily used for communication?
+Host answers: Yes.
+Turn 5: Guesser asks: Is it a handheld device?
+Host answers: Yes.
+Turn 6: Guesser asks: Is it a smartphone?
+Host answers: Yes.
+Turn 7: Guesser guesses: Is the topic a smartphone?
+LLM Judgment: correct. the guesser accurately identified the topic as a "smartphone".
+Correct! The guesser wins in 7 turns.
+The actual topic was: smartphone
+```
+
 At the end of your experiment you'll see some simple analysis for your simulation like e.g.:
 
 ```
