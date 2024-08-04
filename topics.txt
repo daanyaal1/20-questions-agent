@@ -1,0 +1,10 @@
+cat
+airplane
+basketball
+computer
+pizza
+elephant
+guitar
+sunflower
+smartphone
+ocean

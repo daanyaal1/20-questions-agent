@@ -1,14 +1,45 @@
 # 20 Questions Agents
 
-### Strategy
+### Running a Simulation
 
-1. Host chooses topic
-2. While the game ending condition is not met:
-   - Guesser performs an action (question or guess)
-   - If the action is 'question', the host answers the question and guesser adds this information to its history
-   - Otherwise if the guesser's action is 'Ask'
+```bash
+pip install -r requirements.txt
+export OPENAI_API_KEY=<YOUR-API-KEY>
+python main.py --num_games 10
+```
 
-# Thoughts and Observations
+At the end of your experiment you'll see some simple results of your simulation like e.g.:
+
+```
+Game Analysis:
+Total games: 10
+Guesser wins: 6
+Host wins: 0
+Guesser win rate: 60.00%
+Average turns per game: 15.50
+```
+
+The game topic is chosen randomly for each game from the [topics.txt](topics.txt) file.
+You can see example of of an experiment that's previously ran [here](sample_games.txt).
+
+### Evaluation
+
+I played 100 games with the agents, where the host randomly selects from the topics configuration file. Here is a summary of the results:
+
+```
+Game Analysis:
+Total games: 100
+Guesser wins: 55
+Host wins: 45
+Guesser win rate: 55.00%
+Average turns per game: 15.22
+```
+
+Clearly there is some room for improvement if we want to take this further!
+
+### Thoughts and Observations
+
+The following are some musings after simulating some games with our agents. Problems are identified, and sometimes I proposition an avenue of exploration that I have tried or which we could try in the future.
 
 1. How should we deal with ambiguity - the winning condition can be somewhat ambiguous e.g. should we accept 'a personal computer (PC)' when the topic is 'computer'
 
@@ -26,7 +57,7 @@
 
 2. I get the feeling sometimes that the LLM question generator is too influenced by the previous line of questioning (i.e. the kinds of language/tokens in the context window)
 
-   - e.g. see the following interaction where the answer was _guitar_ and the agent guesses chair b
+   - e.g. see the following interaction where the answer was _guitar_ and the agent guesses chair because it was already thinking along the lines of 'furniture'.
 
    ```
    Turn 8: Guesser guesses: A piece of furniture.
@@ -59,21 +90,8 @@
    Game over! The host wins. The topic was: computer
    ```
 
-   - The LLM guesser agent biases towards specific information and often the most recent information (e.g. that the object is used for reading)
+   - The LLM guesser agent biases towards specific information and often the most recent information (i.e. that the object is used for reading)
    - We could consider a strategy that randomly drops information when making guesses to prevent this bias
    - Another apporach may be to prompt the guesser agent to ask only 'absolute' questions like "Is the device's primary purpose for reading". This could help ensure the guesser agents knowledge is not
 
 5. Some games are going by with all questions and not a single guess! We could make guesses more likely later in the game and/or force a guess on the last go.
-
-To modify the task difficulty:
-Easier:
-
-Expand the list of allowed guesses to include subcategories.
-Increase the number of allowed questions/guesses.
-Provide category hints at the start of the game.
-
-Harder:
-
-Restrict the topic list to more abstract or complex concepts.
-Reduce the number of allowed questions/guesses.
-Implement stricter judging criteria for correct guesses.

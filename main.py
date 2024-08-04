@@ -2,6 +2,8 @@ import random
 from typing import List, Tuple
 from openai import OpenAI
 import os
+import argparse
+
 
 # Set up OpenAI client
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -68,28 +70,7 @@ class Guesser(Agent):
     
     def add_qa_to_history(self, question: str, answer: str):
         self.qa_history.append((question, answer))
-    
-    def summarize_attributes(self) -> str:
-        prompt = """
-        Based on the following questions and answers from a game of 20 Questions,
-        summarize the known attributes of the object. Present the information
-        in two sections:
-        1. What we know the object IS or HAS
-        2. What we know the object IS NOT or DOES NOT HAVE
         
-        Present each section in a concise, bullet-point format. If there are any
-        contradictions or uncertainties, mention them.
-
-        Q&A History:
-        """
-        for q, a in self.qa_history:
-            prompt += f"\nQ: {q}\nA: {a}"
-
-        prompt += "\n\nSummary of attributes:"
-
-        response = self.generate_response(prompt)
-        return response
-    
 class Game:
     def __init__(self, host: Host, guesser: Guesser, max_turns: int = 20):
         self.host = host
@@ -154,12 +135,6 @@ class Game:
                 else:
                     print("Incorrect guess. The game continues.")
             
-            # After each turn, summarize the attributes
-            if not self.game_over:
-                print("\nCurrent summary of attributes:")
-                print(self.guesser.summarize_attributes())
-                print()  # Add a blank line for readability
-            
         if not self.game_over:
             self.winner = "host"
             print(f"Game over! The host wins. The topic was: {self.host.chosen_topic}")
@@ -193,9 +168,16 @@ class GameRunner:
         print(f"Guesser win rate: {guesser_wins / self.num_games:.2%}")
         print(f"Average turns per game: {avg_turns:.2f}")
 
-# Run the game
-topics = ["cat", "airplane", "basketball", "computer", "pizza", "elephant", "guitar", "sunflower", "smartphone", "ocean"]
-# topics = ["cat"]
-runner = GameRunner(10, topics)
-runner.run()
-runner.analyze_results()
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="Run 20 Questions AI experiments")
+    parser.add_argument('-n', '--num_games', type=int, default=10,
+                        help="Number of experiments (games) to run (default: 100)")
+    return parser.parse_args()
+
+if __name__ == "__main__":
+    with open("topics.txt", 'r') as file:
+        topics = [line.strip() for line in file if line.strip()]
+    args = parse_arguments()
+    runner = GameRunner(args.num_games, topics)
+    runner.run()
+    runner.analyze_results()
