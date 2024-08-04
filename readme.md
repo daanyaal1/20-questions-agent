@@ -93,6 +93,6 @@ The following are some musings after simulating some games with our agents. Prob
 
    - The LLM guesser agent biases towards specific information and often the most recent information (i.e. that the object is used for reading)
    - We could consider a strategy that randomly drops information when making guesses to prevent this bias
-   - Another apporach may be to prompt the guesser agent to ask only 'absolute' questions like "Is the device's primary purpose for reading". This could help ensure the guesser agents knowledge is not
+   - Another apporach may be to prompt the guesser agent to ask only 'absolute' questions like "Is the device's primary purpose for reading". This could help ensure the guesser agents knowledge is not grounded in 'fringe' attributes of the object in question.
 
 5. Some games are going by with all questions and not a single guess! We could make guesses more likely later in the game and/or force a guess on the last go.
