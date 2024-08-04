@@ -8,7 +8,7 @@ export OPENAI_API_KEY=<YOUR-API-KEY>  # set your API key as an environment varia
 python main.py --num_games 10
 ```
 
-At the end of your experiment you'll see some simple results of your simulation like e.g.:
+At the end of your experiment you'll see some simple analysis for your simulation like e.g.:
 
 ```
 Game Analysis:
