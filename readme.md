@@ -4,7 +4,7 @@
 
 ```bash
 pip install -r requirements.txt
-export OPENAI_API_KEY=<YOUR-API-KEY>
+export OPENAI_API_KEY=<YOUR-API-KEY>  # set your API key as an environment variable
 python main.py --num_games 10
 ```
 
